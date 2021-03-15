@@ -1,0 +1,1 @@
+"%~dp0ConsultCrm.DataFramework.exe" /editor

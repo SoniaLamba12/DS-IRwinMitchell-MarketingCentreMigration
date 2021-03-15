@@ -1,0 +1,16 @@
+<Config>
+  <CrmServer PasswordEncrypted="0" Type="ConnectionString" ConnectionString="Service Uri=https://advdemo.crm4.dynamics.com/XRMServices/2011/Organization.svc;User Name=sonia.lamba@consultcrmco1uk.onmicrosoft.com;Password=Ou13zbw7!;Authentication Type=Office365;Timeout=00:30:00;" Name="Adv Demo" Active="1" IsDefault="1" />
+  <Database Name="Excel" Active="1" ConnectionStringEncrypted="0" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\sonia.lamba\source\repos\MarketingCentreMigration\company1.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES&quot;;" IsDefault="1" />
+  <TransactionPausing Interval="100" Time="4000" />
+  <UploadProcess Name="Company URL" Active="1" Id="944d0896-42d6-4a9e-a1e4-1b33cfabdbcb" EntityName="account" ReferenceTypeSuffix="_type" OptionsSuffix="_options" ExternalPrimaryKeySuffix="_pk" ExternalForeignKeyInfix="_fk_" IgnoreNulls="0" CheckForChanges="0" ValidateData="0" UseUpdateFor="None" BatchProcessSize="0" MaxRequests="1">
+    <Plugin AssemblyName="MarketingCentreMigration.dll" ClassName="MarketingCentreMigration.ImportDataTransformations" Active="1" />
+    <Sql><![CDATA[Select 
+    CompanyName as name
+    ,Website as websiteurl
+    ,addresslines as addresslines
+    ,city as address1_city
+    ,postalcode as address1_postalcode
+    ,"insert" as newaction from [company$]]]></Sql>
+    <ActionIndicator ColumnName="newaction" InsertValue="insert" UpdateValue="update" UpsertValue="upsert" DeleteValue="delete" />
+  </UploadProcess>
+</Config>
