@@ -41,19 +41,30 @@ namespace MarketingCentreMigration
 
         public string ExtractWebSiteUrl(string text)
         {
-           string website = String.Empty;
-           Regex regex = new Regex(@"[\w-]+(\.[\w-]+)+[\w.,@?^=%;:\/~+#-]*[\w@?^=;\/~+#-]");
-           Match match = regex.Match(text);
-           if (match.Success)
-               website = match.Value;
-           return website;
+            string website = String.Empty;
+            Regex regex = new Regex(@"[\w-]+(\.[\w-]+)+[\w.,@?^=%;:\/~+#-]*[\w@?^=;\/~+#-]");
+            if (!String.IsNullOrEmpty(text))
+            {
+                Match match = regex.Match(text);
+                if (match.Success)
+                    website = match.Value;
+                return website;
+            }
+            else
+                return String.Empty;
         }
 
         public static string[] ExtractAddress(string text)
         {
-            string[] lines =
-             text.Split(new[] { "\r\n","\n","\r" }, StringSplitOptions.None);
-            return lines;
+            string[] lines;
+            if (!String.IsNullOrEmpty(text))
+            {
+                lines =
+                 text.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);
+                return lines;
+            }
+            else
+                return Array.Empty<string>();
         }
 
     }
